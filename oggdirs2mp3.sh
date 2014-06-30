@@ -36,7 +36,6 @@ shift $(($OPTIND-1))
 if [ ! -d "$OUTBASE" ]; then
 	printf "E: directory \"%s\" not found. Abort.\n" "$OUTBASE" >&2
 	exit 1
-	continue
 fi
 
 for DIR in "$@"; do
