@@ -24,10 +24,13 @@ check_executables ogg2mp3 mp3gain
 
 MP3GAIN_FLAGS='-r -k -d 9'
 OUTBASE='.'
+DO_GAIN=false
 
-while getopts 'd:' OPT; do
+while getopts 'd:g' OPT; do
 	case $OPT in
 	'd')	OUTBASE="$OPTARG"
+		;;
+	'g')	DO_GAIN=true
 		;;
 	esac
 done
@@ -58,6 +61,7 @@ for DIR in "$@"; do
 		chmod 644 "$OGGPATH"
 		( cd "$OUTPATH" &&
 			ogg2mp3 --delete "$OGG" &&
+			$DO_GAIN &&
 			mp3gain $MP3GAIN_FLAGS "$MP3" )
 	done
 
